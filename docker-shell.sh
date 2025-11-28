@@ -1,69 +1,89 @@
 #!/bin/bash
 
-# Face Expression Detection - Docker Commands
-# ============================================
+# Docker Compose Commands for Face Expression Detection
+# ======================================================
 
-# 1. BUILD THE DOCKER IMAGE
-# --------------------------
-echo "Building Docker image..."
-docker build -t face-expression-detector:latest .
-
-# 2. RUN THE CONTAINER (Linux/WSL2 with webcam)
-# ----------------------------------------------
-echo "Running container with webcam access..."
-docker run -d \
-  --name face-expression-app \
-  -p 5000:5000 \
-  --device=/dev/video0:/dev/video0 \
-  -v "$(pwd)/models:/app/models" \
-  --restart unless-stopped \
-  face-expression-detector:latest
-
-# 3. RUN THE CONTAINER (Without webcam - for testing)
-# ----------------------------------------------------
-# docker run -d \
-#   --name face-expression-app \
-#   -p 5000:5000 \
-#   -v "$(pwd)/models:/app/models" \
-#   --restart unless-stopped \
-#   face-expression-detector:latest
-
-# 4. CHECK CONTAINER STATUS
-# -------------------------
-docker ps -a | grep face-expression-app
-
-# 5. VIEW LOGS
-# ------------
-docker logs -f face-expression-app
-
-# 6. STOP THE CONTAINER
-# ---------------------
-# docker stop face-expression-app
-
-# 7. START THE CONTAINER
-# ----------------------
-# docker start face-expression-app
-
-# 8. REMOVE THE CONTAINER
-# -----------------------
-# docker rm -f face-expression-app
-
-# 9. REMOVE THE IMAGE
-# -------------------
-# docker rmi face-expression-detector:latest
-
-# 10. REBUILD (after code changes)
-# --------------------------------
-# docker rm -f face-expression-app
-# docker build -t face-expression-detector:latest .
-# docker run -d --name face-expression-app -p 5000:5000 --device=/dev/video0:/dev/video0 face-expression-detector:latest
-
+echo "Face Expression Detection - Docker Compose Commands"
+echo "===================================================="
 echo ""
-echo "✅ Container is running!"
-echo "🌐 Access the application at: http://localhost:5000"
+
+# 1. BUILD AND START (First Time)
+echo "1. Build and start the application:"
+echo "   docker-compose up --build"
 echo ""
-echo "Useful commands:"
-echo "  - View logs: docker logs -f face-expression-app"
-echo "  - Stop container: docker stop face-expression-app"
-echo "  - Start container: docker start face-expression-app"
-echo "  - Remove container: docker rm -f face-expression-app"
+
+# 2. START IN BACKGROUND
+echo "2. Start in detached mode (background):"
+echo "   docker-compose up -d"
+echo ""
+
+# 3. START WITH BUILD
+echo "3. Rebuild and start:"
+echo "   docker-compose up --build -d"
+echo ""
+
+# 4. VIEW LOGS
+echo "4. View logs:"
+echo "   docker-compose logs -f"
+echo "   docker-compose logs -f face-expression-detector"
+echo ""
+
+# 5. STOP SERVICES
+echo "5. Stop services:"
+echo "   docker-compose stop"
+echo ""
+
+# 6. START SERVICES
+echo "6. Start services (after stop):"
+echo "   docker-compose start"
+echo ""
+
+# 7. RESTART SERVICES
+echo "7. Restart services:"
+echo "   docker-compose restart"
+echo ""
+
+# 8. STOP AND REMOVE CONTAINERS
+echo "8. Stop and remove containers:"
+echo "   docker-compose down"
+echo ""
+
+# 9. STOP, REMOVE CONTAINERS AND VOLUMES
+echo "9. Stop, remove containers and volumes:"
+echo "   docker-compose down -v"
+echo ""
+
+# 10. VIEW RUNNING SERVICES
+echo "10. View running services:"
+echo "    docker-compose ps"
+echo ""
+
+# 11. EXECUTE COMMAND IN CONTAINER
+echo "11. Execute command in container:"
+echo "    docker-compose exec face-expression-detector bash"
+echo ""
+
+# 12. VIEW SERVICE STATUS
+echo "12. Check service health:"
+echo "    docker-compose ps"
+echo "    docker inspect face_expression_app"
+echo ""
+
+# 13. REBUILD WITHOUT CACHE
+echo "13. Rebuild without cache:"
+echo "    docker-compose build --no-cache"
+echo "    docker-compose up -d"
+echo ""
+
+# 14. SCALE SERVICES (if needed)
+echo "14. Scale services:"
+echo "    docker-compose up -d --scale face-expression-detector=2"
+echo ""
+
+echo "===================================================="
+echo "Quick Start:"
+echo "  docker-compose up --build -d"
+echo "  docker-compose logs -f"
+echo ""
+echo "Access: http://localhost:5000"
+echo "===================================================="
